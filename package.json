@@ -1,0 +1,13 @@
+{
+  "name": "bug-catcher",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run setup:client && npm run setup:server",
+    "setup:client": "cd bug-catcher.client && npm i",
+    "setup:server": "cd bug-catcher.server && npm i",
+    "start": "node bug-catcher.server/index.js"
+  },
+  "engines": {
+    "node": "^14.15.4"
+  }
+}

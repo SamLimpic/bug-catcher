@@ -34,7 +34,7 @@ class BugsService {
     return data
   }
 
-  async closeBug(id) {
+  async release(id) {
     const body = { closed: 'true' }
     const data = await dbContext.Bugs.findOneAndUpdate({ _id: id }, body, { new: true })
     if (!data) {

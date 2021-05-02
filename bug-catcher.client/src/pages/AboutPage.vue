@@ -37,7 +37,7 @@
             </button>
           </div>
         </div>
-        <div class="row justify-content-around p-3 my-3 shadow bg-light">
+        <!-- <div class="row justify-content-around p-3 my-3 shadow bg-light">
           <div class="col-2">
             <button type="button" class="btn btn-lg btn-outline-primary">
               Primary
@@ -68,7 +68,7 @@
               Info
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

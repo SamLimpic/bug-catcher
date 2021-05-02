@@ -6,8 +6,8 @@
     <router-view />
   </main>
   <footer>
-    <div class="bg-dark text-light text-center pt-3 pb-2">
-      <p> Made with <i class="fab fa-vuejs"></i> by Samwise</p>
+    <div class="bg-dark text-light text-center pt-3 pb-1">
+      <p> Made with <i class="fab fa-vuejs text-success my-auto"></i> by Samwise</p>
     </div>
   </footer>
 </template>
@@ -28,5 +28,8 @@ export default {
 @import "./assets/scss/main.scss";
 p {
   font-size: 1.25rem
+}
+i {
+font-size: 1.5rem
 }
 </style>

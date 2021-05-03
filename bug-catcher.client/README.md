@@ -30,7 +30,7 @@ The Bugs can be sorted or filtered by their status
 
 Bugs can be closed from the BugDetails page
 
-Bugs and Notes show their authors name and image
+<!-- Bugs and Notes show their authors name and image -->
 
 <!-- Users can only modify/delete data they created -->
 

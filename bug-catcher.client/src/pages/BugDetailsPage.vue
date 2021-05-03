@@ -22,13 +22,16 @@
               {{ state.activeBug.creator.name.split('@')[0] }}
             </h2>
           </div>
-          <div class="col-md-4 col-12 text-md-left text-center mb-2">
-            <h2>
+          <div class="col-md-4 col-12 text-md-right text-center mb-2">
+            <button type="button" class="btn btn-lg btn-info font-md mb-md-3 my-2" @click="editBug" v-if="account.id === state.activeBug.creatorId">
+              Edit
+            </button>
+            <h2 class="text-md-left text-center">
               <span class="font-sm"> Last Updated: <br></span>{{ `${state.activeBug.updatedAt.slice(5, 7)}/${state.activeBug.updatedAt.slice(8, 10)}/${state.activeBug.updatedAt.slice(0, 4)}` }}
             </h2>
           </div>
           <div class="col-md-2 col-12 text-md-left text-center mb-2">
-            <button type="button" class="btn btn-lg btn-danger font-md mb-md-3 my-2" v-if="user.id === state.activeBug.creatorId">
+            <button type="button" class="btn btn-lg btn-danger font-md mb-md-3 my-2" v-if="account.id === state.activeBug.creatorId">
               Release
             </button>
             <h2 v-if="state.activeBug.closed">
@@ -71,10 +74,11 @@
             </h3>
           </div>
           <div class="col-md-4 col-6 text-right">
-            <button type="button" class="btn btn-lg btn-success font-md mb-3" @click="addNote()" v-if="user.isAuthenticated">
-              Add
+            <button type="button" class="btn btn-lg btn-primary font-md mb-3" @click="addNote()" v-if="user.isAuthenticated">
+              Add Note
             </button>
             <button
+              type="button"
               class="btn btn-lg btn-primary font-md mb-3"
               @click="login"
               v-if="!user.isAuthenticated"
@@ -148,6 +152,7 @@ export default {
     })
     return {
       state,
+      account: computed(() => AppState.account),
       user: computed(() => AppState.user),
       async addNote() {
         try {
@@ -156,6 +161,13 @@ export default {
         } catch (error) {
           Notification.toast('Error: ', +error, 'error')
         }
+      },
+      async editBug() {
+        await Notification.modal()
+        await bugsService.editBug(AppState.activeBug.id, AppState.activePost)
+      },
+      async hideReleased() {
+
       },
       async login() {
         AuthService.loginWithPopup()

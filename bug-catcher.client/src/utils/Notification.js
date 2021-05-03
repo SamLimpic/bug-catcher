@@ -87,4 +87,27 @@ export default class Notification {
       }
     }
   }
+
+  static async modal() {
+    const { value: formValues } = await Swal.fire({
+      title: 'Multiple inputs',
+      html:
+      `<input id="modal-input1" class="modal2-input" value="${AppState.activeBug.title}">` +
+      `<input id="modal-input2" type="textarea" class="modal2-input" value="${AppState.activeBug.description}">`,
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById('modal-input1').value,
+          document.getElementById('modal-input2').value
+        ]
+      }
+    })
+
+    if (formValues) {
+      AppState.activePost = {
+        title: document.getElementById('modal-input1').value,
+        description: document.getElementById('modal-input2').value
+      }
+    }
+  }
 }

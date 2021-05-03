@@ -13,6 +13,7 @@
               Catch a Bug
             </button>
             <button
+              type="button"
               class="btn btn-lg btn-primary"
               @click="login"
               v-if="!user.isAuthenticated"
@@ -27,8 +28,8 @@
           </div>
           <div class="col-md-3 col-12 order-md-3 order-3 text-md-right text-center">
             <div class="form-check row align-items-center pr-md-1">
-              <input class="form-check-input checkbox-2x" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label font-sm" for="defaultCheck1">
+              <input class="form-check-input checkbox-2x" type="checkbox" value="" id="hide-released" @click="hideReleased">
+              <label class="form-check-label font-sm" for="hide-released">
                 Hide Released
               </label>
             </div>

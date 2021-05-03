@@ -9,10 +9,10 @@
       <h4>{{ noteProp.body }}</h4>
     </div>
     <div class="col-md-2 col-4 order-md-3 order-2 text-md-center text-left px-md-0 px-2">
-      <button class="btn btn-lg btn-transparent" @click="deleteNote(noteProp.id)" v-if="noteProp.creator.id === account.id">
+      <button type="button" class="btn btn-lg btn-transparent" @click="deleteNote(noteProp.id)" v-if="noteProp.creator.id === account.id">
         <i class="fas fa-ban text-danger"></i>
       </button>
-      <button class="btn btn-lg btn-transparent" disabled v-else>
+      <button type="button" class="btn btn-lg btn-transparent" disabled v-else>
         <i class="fas fa-ban text-dark"></i>
       </button>
     </div>

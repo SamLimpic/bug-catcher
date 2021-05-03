@@ -38,7 +38,7 @@ User is prompted 'are you sure?' when closing a Bug and their choice respected
 
 User is prompted 'are you sure?' to remove Note from Bug and their choice respected
 
-A Bug can be edited if it is not closed & cannot be edited after it is closed
+<!-- A Bug can be edited if it is not closed & cannot be edited after it is closed -->
 
 <!-- Only the DELETE HTTP Request can be used to close a bug -->
 

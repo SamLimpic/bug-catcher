@@ -90,23 +90,31 @@ export default class Notification {
 
   static async modal() {
     const { value: formValues } = await Swal.fire({
-      title: 'Multiple inputs',
+      title: 'Edit Your Bug',
       html:
-      `<input id="modal-input1" class="modal2-input" value="${AppState.activeBug.title}">` +
-      `<input id="modal-input2" type="textarea" class="modal2-input" value="${AppState.activeBug.description}">`,
+        `<form>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Bug Name</label>
+            <input type="text" class="form-control" id="swal-input1" value="${AppState.activeBug.title}">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Bug Description</label>
+            <textarea class="form-control" id="swal-input2" rows="3">${AppState.activeBug.description}</textarea>
+          </div>
+        </form>`,
       focusConfirm: false,
       preConfirm: () => {
         return [
-          document.getElementById('modal-input1').value,
-          document.getElementById('modal-input2').value
+          document.getElementById('swal-input1').value,
+          document.getElementById('swal-input2').value
         ]
       }
     })
 
     if (formValues) {
       AppState.activePost = {
-        title: document.getElementById('modal-input1').value,
-        description: document.getElementById('modal-input2').value
+        title: document.getElementById('swal-input1').value,
+        description: document.getElementById('swal-input2').value
       }
     }
   }

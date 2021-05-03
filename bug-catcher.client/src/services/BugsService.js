@@ -44,7 +44,7 @@ class BugsService {
 
   async editBug(bugId, edit) {
     await api.put(`api/bugs/${bugId}`, edit)
-    await this.getAllBugs()
+    await this.getBugById(bugId)
   }
 
   async releaseBug(bugId) {

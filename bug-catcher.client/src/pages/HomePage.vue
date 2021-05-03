@@ -1,6 +1,6 @@
 <template>
   <div class="home container">
-    <div class="row justify-content-center" v-if="user.isAuthenticated">
+    <div class="row justify-content-center">
       <div class="col-md-8 col-10 shadow bg-light text-center p-4 m-5">
         <h2><u>Welcome to Bug Catcher</u>!</h2>
         <div class="row justify-content-center">
@@ -13,14 +13,6 @@
             </router-link>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row justify-content-center" v-else>
-      <div class="col-md-6 col-10 shadow bg-light text-center p-4 m-5">
-        <h2><u>Log in to view our collection!</u></h2>
-        <h1 class="m-0 p-0">
-          <i class="fas fa-bug fa-spin text-info text-success large-icon"></i>
-        </h1>
       </div>
     </div>
   </div>

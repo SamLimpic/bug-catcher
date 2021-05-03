@@ -69,32 +69,22 @@ export default class Notification {
     })
   }
 
-  async radio() {
-    /* inputOptions can be an object or Promise */
-
-    const inputOptions = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          '#ff0000': 'Red',
-          '#00ff00': 'Green',
-          '#0000ff': 'Blue'
-        })
-      }, 1000)
+  static async textArea() {
+    const { value: text } = await Swal.fire({
+      input: 'textarea',
+      inputLabel: `Note on ${AppState.activeBug.title}`,
+      inputPlaceholder: 'Add your note here...',
+      inputAttributes: {
+        'aria-label': 'Add your note here'
+      },
+      showCancelButton: true
     })
 
-    const { value: color } = await Swal.fire({
-      title: "What's that bug?!",
-      input: 'radio',
-      inputOptions: inputOptions,
-      inputValidator: (value) => {
-        if (!value) {
-          return 'You need to choose something!'
-        }
+    if (text) {
+      AppState.activePost = {
+        bug: AppState.activeBug.id,
+        body: text
       }
-    })
-
-    if (color) {
-      Swal.fire({ html: `You selected: ${color}` })
     }
   }
 }

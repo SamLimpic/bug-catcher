@@ -17,7 +17,6 @@ class BugsService {
     const res = await pokeApi.get('type/7')
     AppState.pokeBugs = res.data.pokemon
     AppState.pokeBugs = AppState.pokeBugs.filter(p => p.pokemon.name.indexOf('-') === -1)
-    console.log(AppState.pokeBugs)
   }
 
   async getPokeBug(name) {
@@ -34,12 +33,12 @@ class BugsService {
 
   async getNotesByBugId(bugId) {
     const res = await api.get(`api/bugs/${bugId}/notes`)
-    AppState.notes[bugId] = res.data
+    AppState.notes = res.data
   }
 
   async catchBug(data) {
     const res = await api.post('api/bugs', data)
-    AppState.bugs.push(res.data)
+    await this.getAllBugs()
     router.push({ name: 'BugDetails', params: { id: res.data.id } })
   }
 

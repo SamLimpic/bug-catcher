@@ -9,8 +9,15 @@
       <div class="col-12">
         <div class="row justify-content-between align-items-end ">
           <div class="col-md-3 col-12 order-md-1 order-2 text-md-left text-center pl-md-0 my-md-0 my-3">
-            <button type="button" class="btn btn-lg btn-primary" @click="getPokeBug">
+            <button type="button" class="btn btn-lg btn-primary" @click="getPokeBug" v-if="user.isAuthenticated">
               Catch a Bug
+            </button>
+            <button
+              class="btn btn-lg btn-primary"
+              @click="login"
+              v-if="!user.isAuthenticated"
+            >
+              Login
             </button>
           </div>
           <div class="col-md-6 col-12 order-md-2 order-1 text-center">
@@ -30,18 +37,19 @@
         <div class="row justify-content-between table-border mt-3" v-if="state.bugs[0]">
           <div class="col-12">
             <div class="row">
-              <div class="col-md-1"></div>
+              <div class="col-1 d-md-block d-none"></div>
               <div class="col-md-3 col-7">
                 <h3>Name</h3>
               </div>
+              <div class="col-1 d-md-block d-none"></div>
               <div class="col-3 d-md-block d-none">
                 <h3>Catcher</h3>
               </div>
               <div class="col-md-2 col-5 text-md-left text-right">
                 <h3>Status</h3>
               </div>
-              <div class="col-3 d-md-block d-none">
-                <h3>Last Updated</h3>
+              <div class="col-2 d-md-block d-none">
+                <h3>Updated</h3>
               </div>
             </div>
             <div class="row table-border-top">
@@ -64,6 +72,7 @@ import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { bugsService } from '../services/BugsService'
 import Notification from '../utils/Notification'
+import { AuthService } from '../services/AuthService'
 
 export default {
   name: 'Bugs',
@@ -71,8 +80,7 @@ export default {
     const state = reactive({
       loading: true,
       newPost: computed(() => AppState.newPost),
-      bugs: computed(() => AppState.bugs),
-      user: computed(() => AppState.user)
+      bugs: computed(() => AppState.bugs)
     })
     onMounted(async() => {
       try {
@@ -89,6 +97,7 @@ export default {
     })
     return {
       state,
+      user: computed(() => AppState.user),
       async getPokeBug() {
         try {
           const index = Math.floor(Math.random() * 82)
@@ -107,6 +116,9 @@ export default {
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
         }
+      },
+      async login() {
+        AuthService.loginWithPopup()
       }
     }
   }

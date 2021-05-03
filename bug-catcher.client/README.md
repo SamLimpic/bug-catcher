@@ -1,27 +1,26 @@
-CodeWorks Vue Starter
-=====================
+# CodeWorks Vue Starter
 
-Users Can Register, Login, and Logout
+<!-- Users Can Register, Login, and Logout -->
 
-At least 2 supported front end routes, Bugs and BugDetails
+<!-- At least 2 supported front end routes, Bugs and BugDetails -->
 
-Navbar allows navigating back to BugsPage
+<!-- Navbar allows navigating back to BugsPage -->
 
-The BugsPage shows all bugs (pagination allowed)
+<!-- The BugsPage shows all bugs (pagination allowed) -->
 
-Bugs can be created from the Bugs page
+<!-- Bugs can be created from the Bugs page -->
 
-The list of Bugs are rendered with content separation (table or cards)
+<!-- The list of Bugs are rendered with content separation (table or cards) -->
 
 The Bugs can be sorted or filtered by their status
 
-Bugs display last modified date in a standardized format (MM-DD-YYYY)
+<!-- Bugs display last modified date in a standardized format (MM-DD-YYYY) -->
 
-Styling Indication on bugs page that bug is closed (color, strike-through, etc.)
+<!-- Styling Indication on bugs page that bug is closed (color, strike-through, etc.) -->
 
-Creating a new Bug automatically navigates to the BugDetails page
+<!-- Creating a new Bug automatically navigates to the BugDetails page -->
 
-The BugDetails route uses a route parameter and still renders the bug after refresh
+<!-- The BugDetails route uses a route parameter and still renders the bug after refresh -->
 
 The BugDetails displays all the details of a bug, its status and notes
 
@@ -47,6 +46,6 @@ The PUT route does not allow the closed status of a Bug to be changed
 
 The Client and Server enforce all above independently
 
-Api passes all Postman Tests
+<!-- Api passes all Postman Tests -->
 
 Application UI adheres to Phase I, Phase II and Phase III of the CodeWorks Design Requirements

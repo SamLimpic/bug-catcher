@@ -1,5 +1,5 @@
 import { AppState } from '../AppState'
-// import router from '../router'
+import router from '../router'
 import { api, pokeApi } from './AxiosService'
 
 class BugsService {
@@ -18,11 +18,14 @@ class BugsService {
     AppState.pokeBugs = res.data.pokemon
   }
 
-  async getPokeBug() {
-    const index = Math.floor(Math.random() * 96)
-    AppState.activePokeBug = AppState.pokeBugs[index].pokemon
-    const res = await pokeApi.get(`pokemon-species/${AppState.activePokeBug.name}`)
-    const imgUrl = await pokeApi.get(`pokemon/${AppState.activePokeBug.name}`)
+  async getPokeBug(name) {
+    const res = await pokeApi.get(`pokemon/${name}`)
+    AppState.activePokeBug = res.data
+  }
+
+  async catchPokeBug(name) {
+    const res = await pokeApi.get(`pokemon-species/${name}`)
+    const imgUrl = await pokeApi.get(`pokemon/${name}`)
     AppState.activePokeBug = res.data
     AppState.activeImg = imgUrl.data.sprites.other['official-artwork'].front_default
   }
@@ -35,7 +38,7 @@ class BugsService {
   async catchBug(data) {
     const res = await api.post('api/bugs', data)
     AppState.bugs.push(res.data)
-    // router.push({ name: 'Bug', params: { id: res.data.id } })
+    router.push({ name: 'BugDetails', params: { id: res.data.id } })
   }
 
   async editBug(bugId, edit) {

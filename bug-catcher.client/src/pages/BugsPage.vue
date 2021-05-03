@@ -5,7 +5,7 @@
         <i class="fas fa-bug fa-spin text-success large-icon mx-1"></i>
       </div>
     </div>
-    <div class="row justify-content-center bg-light shadow p-3 m-md-5 m-1 my-md-0 my-3" v-else>
+    <div class="row justify-content-center bg-light shadow rounded p-3 m-md-0 m-2 my-md-5 my-4" v-else>
       <div class="col-12">
         <div class="row justify-content-between align-items-end ">
           <div class="col-md-3 col-12 order-md-1 order-2 text-md-left text-center pl-md-0 my-md-0 my-3">
@@ -14,42 +14,46 @@
             </button>
           </div>
           <div class="col-md-6 col-12 order-md-2 order-1 text-center">
-            <h1 class="m-0">
+            <h2 class="m-0 font-xl">
               Current Collection
-            </h1>
+            </h2>
           </div>
           <div class="col-md-3 col-12 order-md-3 order-3 text-md-right text-center">
             <div class="form-check row align-items-center pr-md-1">
               <input class="form-check-input checkbox-2x" type="checkbox" value="" id="defaultCheck1">
-              <label class="form-check-label font-lg" for="defaultCheck1">
+              <label class="form-check-label font-sm" for="defaultCheck1">
                 Hide Released
               </label>
             </div>
           </div>
         </div>
-        <div class="row justify-content-between table-border mt-3">
+        <div class="row justify-content-between table-border mt-3" v-if="state.bugs[0]">
           <div class="col-12">
             <div class="row">
-              <div class="col-md-4 col-7">
+              <div class="col-md-1"></div>
+              <div class="col-md-3 col-7">
                 <h3>Name</h3>
               </div>
               <div class="col-3 d-md-block d-none">
                 <h3>Catcher</h3>
               </div>
-              <div class="col-md-3 col-5 text-md-left text-right">
+              <div class="col-md-2 col-5 text-md-left text-right">
                 <h3>Status</h3>
               </div>
-              <div class="col-2 d-md-block d-none">
-                <h3>Updated</h3>
+              <div class="col-3 d-md-block d-none">
+                <h3>Last Updated</h3>
               </div>
             </div>
             <div class="row table-border-top">
-              <div class="col-12" v-if="state.bugs">
+              <div class="col-12">
                 <BugComponent v-for="b in state.bugs" :key="b.id" :bug-prop="b" />
               </div>
             </div>
           </div>
         </div>
+        <h2 class="text-center table-border-top mt-4 pt-3" v-else>
+          We're all out of bugs!  Why not help us add some?
+        </h2>
       </div>
     </div>
   </div>
@@ -87,12 +91,16 @@ export default {
       state,
       async getPokeBug() {
         try {
-          await bugsService.getPokeBug()
+          const index = Math.floor(Math.random() * 96)
+          AppState.activePokeBug = AppState.pokeBugs[index].pokemon
+          const name = AppState.activePokeBug.name
+          await bugsService.catchPokeBug(name)
           const pokeBug = AppState.activePokeBug
+          const text = pokeBug.flavor_text_entries.findIndex(p => p.language.name === 'en')
           await Notification.image()
           AppState.newPost = {
             title: `${pokeBug.name[0].toUpperCase() + pokeBug.name.slice(1)}`,
-            description: `${pokeBug.flavor_text_entries[0].flavor_text}`,
+            description: `${pokeBug.flavor_text_entries[text].flavor_text.replaceAll('', ' ')}`,
             imgUrl: `${AppState.activeImg}`
           }
           await bugsService.catchBug(AppState.newPost)
@@ -110,9 +118,5 @@ export default {
     transform: scale(1.5);
     -webkit-transform: scale(1.5);
     margin-top: .7rem;
-}
-
-.font-lg {
-  font-size: 1.25rem;
 }
 </style>

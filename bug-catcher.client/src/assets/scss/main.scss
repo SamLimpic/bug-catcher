@@ -38,3 +38,27 @@ main {
   border-top-color: var(--warning);
   border-top-style: solid;
 }
+
+.table-border-mid {
+  border-bottom: 1px;
+  border-bottom-color: var(--primary);
+  border-bottom-style: dashed;
+}
+
+.font-sm {
+  font-size: 1.25rem;
+}
+.font-md {
+  font-size: 1.5rem;
+}
+.font-lg {
+  font-size: 1.75rem;
+}
+.font-xl {
+  font-size: 2.5rem;
+}
+
+.img-icon {
+  height: 3rem;
+  width: auto;
+}

@@ -58,7 +58,7 @@ export default class Notification {
     const text = pokeBug.flavor_text_entries.findIndex(p => p.language.name === 'en')
     await Swal.fire({
       title: `You caught a ${pokeBug.name[0].toUpperCase() + pokeBug.name.slice(1)}!`,
-      text: `${pokeBug.flavor_text_entries[text].flavor_text}`,
+      text: `${pokeBug.flavor_text_entries[text].flavor_text.replaceAll('', ' ')}`,
       imageUrl: `${AppState.activeImg}`,
       imageWidth: 200,
       imageHeight: 200,

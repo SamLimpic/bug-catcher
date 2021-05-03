@@ -91,7 +91,7 @@ export default {
       state,
       async getPokeBug() {
         try {
-          const index = Math.floor(Math.random() * 96)
+          const index = Math.floor(Math.random() * 82)
           AppState.activePokeBug = AppState.pokeBugs[index].pokemon
           const name = AppState.activePokeBug.name
           await bugsService.catchPokeBug(name)

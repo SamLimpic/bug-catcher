@@ -16,6 +16,8 @@ class BugsService {
   async getAllPokeBugs() {
     const res = await pokeApi.get('type/7')
     AppState.pokeBugs = res.data.pokemon
+    AppState.pokeBugs = AppState.pokeBugs.filter(p => p.pokemon.name.indexOf('-') === -1)
+    console.log(AppState.pokeBugs)
   }
 
   async getPokeBug(name) {

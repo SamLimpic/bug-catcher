@@ -55,12 +55,13 @@ export default class Notification {
 
   static async image() {
     const pokeBug = AppState.activePokeBug
+    const text = pokeBug.flavor_text_entries.findIndex(p => p.language.name === 'en')
     await Swal.fire({
       title: `You caught a ${pokeBug.name[0].toUpperCase() + pokeBug.name.slice(1)}!`,
-      text: `${pokeBug.flavor_text_entries[1].flavor_text}`,
+      text: `${pokeBug.flavor_text_entries[text].flavor_text}`,
       imageUrl: `${AppState.activeImg}`,
-      imageWidth: 300,
-      imageHeight: 300,
+      imageWidth: 200,
+      imageHeight: 200,
       imageAlt: `It's a ${pokeBug.name[0].toUpperCase() + pokeBug.name.slice(1)}!`,
       confirmButtonText: 'Go to its Page!',
       confirmButtonColor: '#543c65',

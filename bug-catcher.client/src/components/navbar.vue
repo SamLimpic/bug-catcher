@@ -2,11 +2,9 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
+        <h1 class="m-0 pb-1">
+          <i class="fas fa-bug text-success large-icon mx-1"></i> Bug Catcher
+        </h1>
       </div>
     </router-link>
     <button
@@ -23,17 +21,17 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link text-light">
+          <router-link :to="{ name: 'Home' }" class="nav-link text-light mx-2">
             Home
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'Bugs' }" class="nav-link text-light">
-            Bug List
+          <router-link :to="{ name: 'Bugs' }" class="nav-link text-light mx-2">
+            Collection
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link text-light">
+          <router-link :to="{ name: 'About' }" class="nav-link text-light mx-2">
             Test Page
           </router-link>
         </li>
@@ -56,7 +54,7 @@
               :src="user.picture"
               alt="user photo"
               height="40"
-              class="rounded"
+              class="rounded-circle"
             />
             <span class="mx-3 text-light">{{ user.name }}</span>
           </div>
@@ -108,6 +106,10 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 2rem;
+}
+
 .dropdown-menu {
   user-select: none;
   display: block;

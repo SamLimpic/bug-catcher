@@ -1,5 +1,5 @@
 <template>
-  <div class="bug-details flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+  <div class="bug-details container">
   </div>
 </template>
 

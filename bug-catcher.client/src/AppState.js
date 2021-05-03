@@ -6,5 +6,8 @@ export const AppState = reactive({
   account: {},
   notes: {},
   bugs: [],
+  pokeBugs: [],
+  activePokeBug: {},
+  activeImg: {},
   activePost: {}
 })

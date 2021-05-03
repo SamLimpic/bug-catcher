@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+import { AppState } from '../AppState'
 
 export default class Notification {
   /**
@@ -50,5 +51,49 @@ export default class Notification {
       toast: true,
       showConfirmButton: false
     })
+  }
+
+  static async image() {
+    const pokeBug = AppState.activePokeBug
+    await Swal.fire({
+      title: `You caught a ${pokeBug.name[0].toUpperCase() + pokeBug.name.slice(1)}!`,
+      text: `${pokeBug.flavor_text_entries[1].flavor_text}`,
+      imageUrl: `${AppState.activeImg}`,
+      imageWidth: 300,
+      imageHeight: 300,
+      imageAlt: `It's a ${pokeBug.name[0].toUpperCase() + pokeBug.name.slice(1)}!`,
+      confirmButtonText: 'Go to its Page!',
+      confirmButtonColor: '#543c65',
+      background: '#f7f8e0'
+    })
+  }
+
+  async radio() {
+    /* inputOptions can be an object or Promise */
+
+    const inputOptions = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          '#ff0000': 'Red',
+          '#00ff00': 'Green',
+          '#0000ff': 'Blue'
+        })
+      }, 1000)
+    })
+
+    const { value: color } = await Swal.fire({
+      title: "What's that bug?!",
+      input: 'radio',
+      inputOptions: inputOptions,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to choose something!'
+        }
+      }
+    })
+
+    if (color) {
+      Swal.fire({ html: `You selected: ${color}` })
+    }
   }
 }

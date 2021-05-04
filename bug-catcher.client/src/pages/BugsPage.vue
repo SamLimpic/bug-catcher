@@ -28,7 +28,7 @@
             </h2>
           </div>
           <div class="col-md-3 col-12 order-md-3 order-3 text-md-right text-center">
-            <div class="form-check row align-items-center pr-md-1" v-if="state.bugs[0] === null">
+            <div class="form-check row align-items-center pr-md-1" v-if="state.bugs.length">
               <input class="form-check-input checkbox-2x"
                      type="checkbox"
                      value=""
@@ -118,7 +118,8 @@ export default {
           AppState.activePost = {
             title: `${pokeBug.name[0].toUpperCase() + pokeBug.name.slice(1)}`,
             description: `${description.replaceAll('\n', ' ')}`,
-            imgUrl: `${AppState.activeImg}`
+            imgUrl: `${AppState.activeImg}`,
+            origin: `${pokeBug.name}`
           }
           await bugsService.catchBug(AppState.activePost)
           Notification.toast(`You caught a ${AppState.activePost.title}!`, 'success')

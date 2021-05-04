@@ -143,7 +143,7 @@ export default {
     onMounted(async() => {
       try {
         await bugsService.getBugById(route.params.id)
-        const name = state.activeBug.title.toLowerCase()
+        const name = state.activeBug.origin
         await bugsService.getPokeBug(name)
         await bugsService.getNotesByBugId(route.params.id)
         state.loading = false

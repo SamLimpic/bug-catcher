@@ -30,11 +30,11 @@
             Collection
           </router-link>
         </li>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
           <router-link :to="{ name: 'About' }" class="nav-link text-light mx-2">
             Test Page
           </router-link>
-        </li> -->
+        </li>
       </ul>
       <span class="navbar-text">
         <button

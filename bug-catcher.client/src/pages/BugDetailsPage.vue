@@ -9,7 +9,7 @@
       <div class="col-12">
         <div class="row justify-content-between align-items-end">
           <div class="col-md-2 col-12 my-auto">
-            <img class="img-fluid" :src="state.activeBug.imgUrl" alt="">
+            <img class="img-fluid" :src="state.activeBug.imgUrl" label="Who's that bug?!" alt="It's {{state.ActiveBug.title}}!">
           </div>
           <div class="col-md-4 col-12 text-md-left text-center py-1">
             <h1>
@@ -17,13 +17,13 @@
             </h1>
             <h2 class="mt-3">
               <span class="font-sm"> Caught by: <br></span>
-              <span><img class="img-icon rounded-circle my-auto" :src="state.activeBug.creator.picture" alt="">
+              <span><img class="img-icon rounded-circle my-auto" :src="state.activeBug.creator.picture" alt="Account Icon">
               </span>
               {{ state.activeBug.creator.name.split('@')[0] }}
             </h2>
           </div>
           <div class="col-md-4 col-12 text-md-right text-center mb-2">
-            <button type="button" class="btn btn-lg btn-info font-md mb-md-3 my-2" @click="editBug" v-if="account.id === state.activeBug.creatorId">
+            <button type="button" class="btn btn-lg btn-info font-md mb-md-3 my-2" label="Edit Bug" @click="editBug" v-if="account.id === state.activeBug.creatorId && !state.activeBug.closed">
               Edit
             </button>
             <h2 class="text-md-left text-center">
@@ -31,7 +31,7 @@
             </h2>
           </div>
           <div class="col-md-2 col-12 text-md-left text-center mb-2">
-            <button type="button" class="btn btn-lg btn-danger font-md mb-md-3 my-2" v-if="account.id === state.activeBug.creatorId">
+            <button type="button" class="btn btn-lg btn-danger font-md mb-md-3 my-2" label="Release Bug" @click="releaseBug" v-if="account.id === state.activeBug.creatorId && !state.activeBug.closed">
               Release
             </button>
             <h2 v-if="state.activeBug.closed">
@@ -74,12 +74,13 @@
             </h3>
           </div>
           <div class="col-md-4 col-6 text-right">
-            <button type="button" class="btn btn-lg btn-primary font-md mb-3" @click="addNote()" v-if="user.isAuthenticated">
+            <button type="button" class="btn btn-lg btn-primary font-md mb-3" label="Add Note" @click="addNote()" v-if="user.isAuthenticated">
               Add Note
             </button>
             <button
               type="button"
               class="btn btn-lg btn-primary font-md mb-3"
+              label="Login"
               @click="login"
               v-if="!user.isAuthenticated"
             >
@@ -158,16 +159,29 @@ export default {
         try {
           await Notification.textArea()
           await notesService.createNote(AppState.activeBug.id, AppState.activePost)
+          Notification.toast('New note added!', 'success')
         } catch (error) {
           Notification.toast('Error: ', +error, 'error')
         }
       },
       async editBug() {
-        await Notification.modal()
-        await bugsService.editBug(AppState.activeBug.id, AppState.activePost)
+        try {
+          await Notification.modal()
+          await bugsService.editBug(AppState.activeBug.id, AppState.activePost)
+          Notification.toast('Your choice was saved', 'success')
+        } catch (error) {
+          Notification.toast('Error: ', +error, 'error')
+        }
       },
-      async hideReleased() {
-
+      async releaseBug() {
+        try {
+          if (await Notification.confirmAction('Are you sure?', `${AppState.activeBug.title} will be gone for good!`, 'warning', `Release ${AppState.activeBug.title}`)) {
+            await bugsService.releaseBug(AppState.activeBug.id)
+            Notification.toast(`${AppState.activeBug.title} was released!`, 'warning')
+          }
+        } catch (error) {
+          Notification.toast('Error: ', +error, 'error')
+        }
       },
       async login() {
         AuthService.loginWithPopup()

@@ -2,17 +2,17 @@
   <div class="note-component row align-items-center table-border-mid">
     <div class="col-md-3 col-8 order-md-1 order-1">
       <h4 class="py-2 m-0">
-        <span><img class="img-icon rounded-circle my-auto" :src="noteProp.creator.picture" alt=""></span> <i>{{ noteProp.creator.name.split('@')[0] }}</i>
+        <span><img class="img-icon rounded-circle my-auto" :src="noteProp.creator.picture" alt="Creator Icon"></span> <i>{{ noteProp.creator.name.split('@')[0] }}</i>
       </h4>
     </div>
     <div class="col-md-7 col-12 order-md-2 order-3">
       <h4>{{ noteProp.body }}</h4>
     </div>
     <div class="col-md-2 col-4 order-md-3 order-2 text-md-center text-left px-md-0 px-2">
-      <button type="button" class="btn btn-lg btn-transparent" @click="deleteNote(noteProp.id)" v-if="noteProp.creator.id === account.id">
+      <button type="button" class="btn btn-lg btn-transparent" label="Delete Note" @click="deleteNote(noteProp.id)" v-if="noteProp.creator.id === account.id">
         <i class="fas fa-ban text-danger"></i>
       </button>
-      <button type="button" class="btn btn-lg btn-transparent" disabled v-else>
+      <button type="button" label="Delete Note (disabled)" class="btn btn-lg btn-transparent" disabled v-else>
         <i class="fas fa-ban text-dark"></i>
       </button>
     </div>
@@ -38,7 +38,12 @@ export default {
       account: computed(() => AppState.account),
       async deleteNote(id) {
         try {
-          await notesService.deleteNote(id)
+          if (await Notification.confirmAction()) {
+            await notesService.deleteNote(id)
+            Notification.toast('Deleted!', 'warning')
+          } else {
+            Notification.toast('No worries!', 'success')
+          }
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
         }

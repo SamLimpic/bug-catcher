@@ -7,7 +7,7 @@
           <div class="col-11">
             <p>Here we have our pristine collection of arthropods!  Users are welcome to contribute their own catches to the database, as well as comment on existing entries!</p>
             <router-link :to="{name: 'Bugs'}">
-              <button type="button" class="btn btn-lg btn-primary mx-auto text-light mt-md-2 mt-3 mb-md-2" title="View Bugs Button">
+              <button type="button" class="btn btn-lg btn-primary mx-auto text-light mt-md-2 mt-3 mb-md-2" label="View Bugs Button">
                 View the Collection
               </button>
             </router-link>

@@ -49,8 +49,12 @@ class BugsService {
 
   async releaseBug(bugId) {
     const edit = { closed: 'true' }
-    await api.put(`api/bugs/${bugId}`, edit)
-    await this.getAllBugs()
+    await api.delete(`api/bugs/${bugId}`, edit)
+    await this.getBugById(bugId)
+  }
+
+  async hideReleased() {
+    AppState.bugs = AppState.bugs.filter(b => !b.closed)
   }
 }
 

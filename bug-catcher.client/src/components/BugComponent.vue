@@ -2,13 +2,13 @@
   <router-link :to="{ name: 'BugDetails', params: { id:bugProp.id } }">
     <div class="bug-component row align-items-center table-border-mid py-2">
       <div class="col-1 d-md-block d-none pl-3 pr-1">
-        <img class="img-fluid mx-auto" :src="bugProp.imgUrl" alt="">
+        <img class="img-fluid mx-auto" :src="bugProp.imgUrl" label="Who's that bug?!" alt="It's {{bugProp.title}}!">
       </div>
       <div class="col-md-3 col-8">
         <h3>{{ bugProp.title }}</h3>
       </div>
       <div class="col-md-1 col-2 text-md-right text-left px-0">
-        <img class="img-icon rounded-circle mx-auto" :src="bugProp.creator.picture" alt="">
+        <img class="img-icon rounded-circle mx-auto" :src="bugProp.creator.picture" alt="Creator Icon">
       </div>
       <div class="col-3 d-md-block d-none">
         <h3>

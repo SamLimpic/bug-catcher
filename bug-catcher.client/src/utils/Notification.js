@@ -18,8 +18,9 @@ export default class Notification {
         text: text,
         icon: icon,
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        cancelButtonColor: '#a83620',
+        confirmButtonColor: '#543c65',
+        background: '#f7f8e0',
         confirmButtonText: confirmButtonText
       })
       if (res.isConfirmed) {
@@ -77,7 +78,11 @@ export default class Notification {
       inputAttributes: {
         'aria-label': 'Add your note here'
       },
-      showCancelButton: true
+      showCancelButton: true,
+      cancelButtonColor: '#a83620',
+      confirmButtonText: 'Add your note',
+      confirmButtonColor: '#543c65',
+      background: '#f7f8e0'
     })
 
     if (text) {
@@ -95,13 +100,18 @@ export default class Notification {
         `<form>
           <div class="form-group">
             <label for="exampleFormControlInput1">Bug Name</label>
-            <input type="text" class="form-control" id="swal-input1" value="${AppState.activeBug.title}">
+            <input type="text" class="form-control bg-light" id="swal-input1" value="${AppState.activeBug.title}">
           </div>
           <div class="form-group">
             <label for="exampleFormControlTextarea1">Bug Description</label>
-            <textarea class="form-control" id="swal-input2" rows="3">${AppState.activeBug.description}</textarea>
+            <textarea class="form-control bg-light" id="swal-input2" rows="3">${AppState.activeBug.description}</textarea>
           </div>
         </form>`,
+      confirmButtonText: 'Submit your changes',
+      confirmButtonColor: '#543c65',
+      background: '#f7f8e0',
+      showCancelButton: true,
+      cancelButtonColor: '#a83620',
       focusConfirm: false,
       preConfirm: () => {
         return [

@@ -30,15 +30,16 @@
             Collection
           </router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link :to="{ name: 'About' }" class="nav-link text-light mx-2">
             Test Page
           </router-link>
-        </li>
+        </li> -->
       </ul>
       <span class="navbar-text">
         <button
           class="btn btn-outline-light text-uppercase"
+          label="Login"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -63,13 +64,9 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Account
-              </div>
-            </router-link>
             <div
               class="list-group-item list-group-item-action hoverable"
+              label="Login"
               @click="logout"
             >
               logout

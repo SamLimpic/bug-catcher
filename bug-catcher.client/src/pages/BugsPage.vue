@@ -9,12 +9,13 @@
       <div class="col-12">
         <div class="row justify-content-between align-items-end ">
           <div class="col-md-3 col-12 order-md-1 order-2 text-md-left text-center pl-md-0 my-md-0 my-3">
-            <button type="button" class="btn btn-lg btn-primary" @click="getPokeBug" v-if="user.isAuthenticated">
+            <button type="button" class="btn btn-lg btn-primary" label="Catch a bug" @click="getPokeBug" v-if="user.isAuthenticated">
               Catch a Bug
             </button>
             <button
               type="button"
               class="btn btn-lg btn-primary"
+              label="Login"
               @click="login"
               v-if="!user.isAuthenticated"
             >
@@ -27,8 +28,13 @@
             </h2>
           </div>
           <div class="col-md-3 col-12 order-md-3 order-3 text-md-right text-center">
-            <div class="form-check row align-items-center pr-md-1">
-              <input class="form-check-input checkbox-2x" type="checkbox" value="" id="hide-released" @click="hideReleased">
+            <div class="form-check row align-items-center pr-md-1" v-if="state.bugs[0] === null">
+              <input class="form-check-input checkbox-2x"
+                     type="checkbox"
+                     value=""
+                     id="hide-released"
+                     @click="hideReleased"
+              >
               <label class="form-check-label font-sm" for="hide-released">
                 Hide Released
               </label>
@@ -107,15 +113,30 @@ export default {
           await bugsService.catchPokeBug(name)
           const pokeBug = AppState.activePokeBug
           const text = pokeBug.flavor_text_entries.findIndex(p => p.language.name === 'en')
+          const description = pokeBug.flavor_text_entries[text].flavor_text.replaceAll('', ' ')
           await Notification.image()
-          AppState.newPost = {
+          AppState.activePost = {
             title: `${pokeBug.name[0].toUpperCase() + pokeBug.name.slice(1)}`,
-            description: `${pokeBug.flavor_text_entries[text].flavor_text.replaceAll('', ' ')}`,
+            description: `${description.replaceAll('\n', ' ')}`,
             imgUrl: `${AppState.activeImg}`
           }
-          await bugsService.catchBug(AppState.newPost)
+          await bugsService.catchBug(AppState.activePost)
+          Notification.toast(`You caught a ${AppState.activePost.title}!`, 'success')
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
+        }
+      },
+      async hideReleased() {
+        try {
+          if (document.getElementById('hide-released').checked === true) {
+            await bugsService.hideReleased()
+            Notification.toast('"Released" hidden', 'warning')
+          } else {
+            await bugsService.getAllBugs()
+            Notification.toast('"Released" shown', 'info')
+          }
+        } catch (error) {
+          Notification.toast('Error: ', +error, 'error')
         }
       },
       async login() {

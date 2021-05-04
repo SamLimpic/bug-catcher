@@ -12,7 +12,7 @@
 
 <!-- The list of Bugs are rendered with content separation (table or cards) -->
 
-The Bugs can be sorted or filtered by their status
+<!-- The Bugs can be sorted or filtered by their status -->
 
 <!-- Bugs display last modified date in a standardized format (MM-DD-YYYY) -->
 
@@ -28,15 +28,15 @@ The Bugs can be sorted or filtered by their status
 
 <!-- Notes can be added and removed from a bug in the BugDetails page -->
 
-Bugs can be closed from the BugDetails page
+<!-- Bugs can be closed from the BugDetails page -->
 
 <!-- Bugs and Notes show their authors name and image -->
 
 <!-- Users can only modify/delete data they created -->
 
-User is prompted 'are you sure?' when closing a Bug and their choice respected
+<!-- User is prompted 'are you sure?' when closing a Bug and their choice respected -->
 
-User is prompted 'are you sure?' to remove Note from Bug and their choice respected
+<!-- User is prompted 'are you sure?' to remove Note from Bug and their choice respected -->
 
 <!-- A Bug can be edited if it is not closed & cannot be edited after it is closed -->
 
@@ -48,4 +48,4 @@ User is prompted 'are you sure?' to remove Note from Bug and their choice respec
 
 <!-- Api passes all Postman Tests -->
 
-Application UI adheres to Phase I, Phase II and Phase III of the CodeWorks Design Requirements
+<!-- Application UI adheres to Phase I, Phase II and Phase III of the CodeWorks Design Requirements -->

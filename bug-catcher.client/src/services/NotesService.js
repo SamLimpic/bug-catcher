@@ -3,6 +3,11 @@ import { api } from './AxiosService'
 import { bugsService } from './BugsService'
 
 class NotesService {
+  async getNotesByBugId(bugId) {
+    const res = await api.get(`api/bugs/${bugId}/notes`)
+    AppState.notes = res.data
+  }
+
   async createNote(bugId, data) {
     await api.post('api/notes', data)
     await bugsService.getNotesByBugId(bugId)

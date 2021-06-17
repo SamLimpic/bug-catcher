@@ -1,5 +1,6 @@
 <template>
   <div class="home container">
+    <!-- SECTION Quick & Dirty visual indicator that content is loading -->
     <div class="row justify-content-center" v-if="state.loading">
       <div class="col-12 text-center p-3 m-md-4 my-md-3 my-4">
         <i class="fas fa-bug fa-spin text-success large-icon mx-1"></i>
@@ -66,6 +67,7 @@
             </div>
           </div>
         </div>
+        <!-- SECTION Displays if database is currently empty -->
         <h2 class="text-center table-border-top mt-4 pt-3" v-else>
           We're all out of bugs!  Why not help us add some?
         </h2>
@@ -107,21 +109,7 @@ export default {
       user: computed(() => AppState.user),
       async getPokeBug() {
         try {
-          const index = Math.floor(Math.random() * 82)
-          AppState.activePokeBug = AppState.pokeBugs[index].pokemon
-          const name = AppState.activePokeBug.name
-          await bugsService.catchPokeBug(name)
-          const pokeBug = AppState.activePokeBug
-          const text = pokeBug.flavor_text_entries.findIndex(p => p.language.name === 'en')
-          const description = pokeBug.flavor_text_entries[text].flavor_text.replaceAll('', ' ')
-          await Notification.image()
-          AppState.activePost = {
-            title: `${pokeBug.name[0].toUpperCase() + pokeBug.name.slice(1)}`,
-            description: `${description.replaceAll('\n', ' ')}`,
-            imgUrl: `${AppState.activeImg}`,
-            origin: `${pokeBug.name}`
-          }
-          await bugsService.catchBug(AppState.activePost)
+          await bugsService.formatPokeBug()
           Notification.toast(`You caught a ${AppState.activePost.title}!`, 'success')
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
@@ -129,6 +117,7 @@ export default {
       },
       async hideReleased() {
         try {
+          // NOTE Toggles visible Bugs between 'Caught' and 'Released'
           if (document.getElementById('hide-released').checked === true) {
             await bugsService.hideReleased()
             Notification.toast('"Released" hidden', 'warning')

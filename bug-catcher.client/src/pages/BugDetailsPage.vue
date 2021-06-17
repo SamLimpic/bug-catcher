@@ -145,7 +145,7 @@ export default {
         await bugsService.getBugById(route.params.id)
         const name = state.activeBug.origin
         await bugsService.getPokeBug(name)
-        await bugsService.getNotesByBugId(route.params.id)
+        await notesService.getNotesByBugId(route.params.id)
         state.loading = false
       } catch (error) {
         Notification.toast('Error: ', +error, 'error')
@@ -157,6 +157,7 @@ export default {
       user: computed(() => AppState.user),
       async addNote() {
         try {
+          // NOTE Calls a SWEETALERT modal to add a Note to the selected Bug
           await Notification.textArea()
           await notesService.createNote(AppState.activeBug.id, AppState.activePost)
           Notification.toast('New note added!', 'success')
@@ -166,6 +167,7 @@ export default {
       },
       async editBug() {
         try {
+          // NOTE Calls a SWEETALERT modal to edit the selected Bug
           await Notification.modal()
           await bugsService.editBug(AppState.activeBug.id, AppState.activePost)
           Notification.toast('Your choice was saved', 'success')
@@ -175,6 +177,7 @@ export default {
       },
       async releaseBug() {
         try {
+          // NOTE Confirms before 'Releasing' the selected Bug
           if (await Notification.confirmAction('Are you sure?', `${AppState.activeBug.title} will be gone for good!`, 'warning', `Release ${AppState.activeBug.title}`)) {
             await bugsService.releaseBug(AppState.activeBug.id)
             Notification.toast(`${AppState.activeBug.title} was released!`, 'warning')

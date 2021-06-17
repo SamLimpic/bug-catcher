@@ -1,4 +1,5 @@
 <template>
+  <!-- ANCHOR Unused Account page that comes stock with the Template -->
   <div class="about text-center">
     <h1>Welcome {{ account.name }}</h1>
     <img class="rounded" :src="account.picture" alt="" />
